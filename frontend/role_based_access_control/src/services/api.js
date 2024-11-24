@@ -1,6 +1,7 @@
 import axios from "axios";
 
-const url = "http://localhost:8000";
+// const url = "http://localhost:8000";
+const url = "https://role-based-access-control-5d85.onrender.com";
 
 export const getUser = async () => {
   try {
