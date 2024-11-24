@@ -18,10 +18,12 @@ app.use(cookieParser())
 //route import
 import userRouter from "./routes/user.router.js"
 import rolesRouter from "./routes/roles.router.js"
+import accountRouter from "./routes/account.router.js"
 
 // routes declaration
 app.use("/api/v1/users", userRouter)
 app.use("/api/v1/roles", rolesRouter)
+app.use("/api/v1/account", accountRouter)
 
 app.get('/', (req, res) => {
     res.send("@saurabh")

@@ -76,3 +76,31 @@ export const removePermission = async (roleId, permissionId) => {
     console.error("error while calling removePermission", error.message);
   }
 };
+
+export const signupLocal = async (formData) => {
+  try {
+    const data = {
+      name: formData.get('name'),
+      email: formData.get('email'),
+      password: formData.get('password'),
+      role: formData.get('role'),
+    };
+
+    const response = await axios.post(`${url}/api/v1/account/signup/`, data);
+    return response.data;
+  } catch (error) {
+    console.error('Error in signupLocal:', error.message);
+  }
+};
+
+
+export const loginLocal = async (data) => {
+  try {
+    const response = await axios.post(`${url}/api/v1/account/login/`, data);
+    console.log(response.data)
+    return response.data;
+  } catch (error) {
+    console.error("Error in loginLocal API:", error.message);
+    throw error;
+  }
+};
