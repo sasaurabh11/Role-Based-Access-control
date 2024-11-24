@@ -1,0 +1,156 @@
+.role-management {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin: 30px auto;
+    max-width: 900px;
+    background-color: #9d8888;
+    padding: 25px;
+    border-radius: 12px;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+    border: 1px solid #e2e6ea;
+  }
+  
+  .heading {
+    text-align: center;
+    color: #2d3436;
+    font-size: 2rem;
+    margin-bottom: 30px;
+    font-weight: 600;
+  }
+  
+  .form-container,
+  .role-list-container {
+    margin-bottom: 40px;
+  }
+  
+  .input-field,
+  .select-field {
+    width: 100%;
+    padding: 12px 16px;
+    margin-bottom: 20px;
+    border: 1px solid #b87373;
+    border-radius: 8px;
+    background-color: #dfd5d5;
+    color: #2d3436;
+    font-size: 1rem;
+  }
+  
+  .input-field:focus,
+  .select-field:focus {
+    outline: none;
+    border-color: #0984e3;
+    box-shadow: 0 0 5px rgba(9, 132, 227, 0.3);
+  }
+  
+  .permission-container {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+  }
+  
+  .permission-container div {
+    flex: 1;
+    min-width: 250px;
+  }
+  
+  .add-permission-btn {
+    background-color: #0984e3;
+    color: white;
+    padding: 12px 24px;
+    font-weight: 600;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    width: 100%;
+    max-width: 180px;
+    margin-top: 15px;
+  }
+  
+  .add-permission-btn:hover {
+    background-color: #0766b3;
+    transform: scale(1.05);
+  }
+  
+  .create-role-btn {
+    background-color: #0984e3;
+    color: white;
+    padding: 12px 24px;
+    font-weight: 600;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    width: 100%;
+  }
+  
+  .create-role-btn:hover {
+    background-color: #0766b3;
+    transform: scale(1.05);
+  }
+  
+  .permission-item button,
+  .remove-permission-btn {
+    background-color: #e17055;
+    color: white;
+    padding: 6px 12px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-left: 10px;
+    transition: all 0.3s ease;
+  }
+  
+  .permission-item button:hover,
+  .remove-permission-btn:hover {
+    background-color: #d4634e;
+  }
+  
+  .role-item {
+    background-color: #a3b7c5;
+    color: #022c2b;
+    padding: 20px;
+    margin: 15px 0;
+    border-radius: 8px;
+    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  .role-item h4 {
+    margin-bottom: 12px;
+    color: #2d3436;
+    font-size: 1.2rem;
+    font-weight: 600;
+  }
+  
+  .role-item ul {
+    padding-left: 20px;
+  }
+  
+  .role-item ul li {
+    margin-bottom: 10px;
+    font-size: 0.95rem;
+  }
+  
+  .add-permission-to-role-btn {
+    background-color: #00cec9;
+    color: rgb(16, 1, 1);
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background 0.3s ease;
+  }
+  
+  .add-permission-to-role-btn:hover {
+    background-color: #00b4b2;
+  }
+  
+  .add-permission-to-role-btn:disabled {
+    background-color: #b2dff7;
+    cursor: not-allowed;
+  }
+  
+  .select-field, .input-field {
+    flex: 1;
+    min-width: 200px;
+  }
+  

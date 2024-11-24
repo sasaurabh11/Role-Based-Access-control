@@ -1,0 +1,55 @@
+# Node.js
+node_modules/
+npm-debug.log
+yarn-error.log
+
+# Environment files
+.env
+.env.local
+.env.development
+.env.test
+.env.production
+
+# Logs
+logs/
+*.log
+npm-debug.log*
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Build output
+/build
+/dist
+/.next
+
+# React
+/.cache
+/.eslintcache
+
+# VSCode settings
+.vscode/
+
+# Temporary files
+*.swp
+*~
+.idea/
+
+# MongoDB data files (if any)
+data/
+
+# Test coverage
+coverage/
+
+# Dependency directories
+jspm_packages/
+
+# TypeScript (if applicable)
+*.tsbuildinfo
+
+# Next.js (if applicable)
+.next/
+
+# Next.js Static Files
+out/
