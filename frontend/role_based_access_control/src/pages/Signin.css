@@ -103,6 +103,90 @@
   #role {
     width: 99%;
   }
+
+  .loading-screen {
+    position: fixed; /* Covers the entire screen */
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: linear-gradient(135deg, #000000, #1a1a1a); /* Sleek black gradient */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999; /* Ensures it appears above all other content */
+    animation: fadeIn 0.3s ease-in-out; /* Smooth entry animation */
+  }
+  
+  .loading-blocks {
+    display: flex;
+    gap: 20px; /* Slightly larger spacing for a cleaner look */
+  }
+  
+  .block {
+    width: 25px; /* Slightly smaller for a refined look */
+    height: 25px;
+    background: radial-gradient(circle, #ffffff, #e0e0e0); /* Gradient for a modern touch */
+    border-radius: 50%; /* Rounded blocks */
+    box-shadow: 0 4px 8px rgba(255, 255, 255, 0.3); /* Soft glow effect */
+    animation: bounce 1.2s infinite ease-in-out;
+  }
+  
+  .block:nth-child(2) {
+    animation-delay: 0.2s;
+  }
+  
+  .block:nth-child(3) {
+    animation-delay: 0.4s;
+  }
+  
+  .block:nth-child(4) {
+    animation-delay: 0.6s;
+  }
+  
+  @keyframes bounce {
+    0%, 80%, 100% {
+      transform: scale(0);
+      opacity: 0.5;
+    }
+    40% {
+      transform: scale(1.2); /* Slightly larger bounce for a dynamic effect */
+      opacity: 1;
+    }
+  }
+  
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+  
+  /* Responsive design for smaller screens */
+  @media (max-width: 768px) {
+    .block {
+      width: 20px;
+      height: 20px;
+    }
+  
+    .loading-blocks {
+      gap: 15px;
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .block {
+      width: 15px;
+      height: 15px;
+    }
+  
+    .loading-blocks {
+      gap: 10px;
+    }
+  }
+  
   
   /* Animation */
   @keyframes fadeIn {

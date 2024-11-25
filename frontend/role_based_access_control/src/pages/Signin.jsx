@@ -1,11 +1,11 @@
 import React, { useState, useContext } from 'react';
-import { useNavigate } from 'react-router-dom'; 
+import { useNavigate } from 'react-router-dom';
 import './Signin.css';
 import { AccountContext } from '../ContextApi/AccountProvider';
 import { signupLocal, loginLocal } from '../services/api';
 
 function AuthForm() {
-  const { setLocalAccount, localAccount } = useContext(AccountContext);
+  const { setLocalAccount } = useContext(AccountContext);
   const navigate = useNavigate();
 
   const [name, setName] = useState('');
@@ -13,6 +13,7 @@ function AuthForm() {
   const [password, setPassword] = useState('');
   const [role] = useState('Admin');
   const [isLogin, setIsLogin] = useState(true);
+  const [loading, setLoading] = useState(false); // Loading state
 
   const handleEmailChange = (event) => setEmail(event.target.value);
   const handlePasswordChange = (event) => setPassword(event.target.value);
@@ -20,17 +21,15 @@ function AuthForm() {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
+    setLoading(true); // Show loading screen
 
     try {
       if (isLogin) {
-        // Handle login
         const data = { email, password };
         const responseLogin = await loginLocal(data);
         setLocalAccount(responseLogin.user);
-        alert('Login successful!');
         navigate('/dashboard');
       } else {
-        // Handle signup
         const formData = new FormData();
         formData.append('name', name);
         formData.append('email', email);
@@ -39,76 +38,92 @@ function AuthForm() {
 
         const responseSignup = await signupLocal(formData);
         setLocalAccount(responseSignup.user);
-        alert('Signup successful!');
         navigate('/dashboard');
       }
     } catch (error) {
-      // Handle error and show alert
       alert(`Error: ${error.response?.data?.message || 'Something went wrong!'}`);
+    } finally {
+      setLoading(false);
     }
   };
 
   return (
     <div className="auth-container">
-      <h2>{isLogin ? 'Login' : 'Sign Up'}</h2>
-
-      <form onSubmit={handleSubmit} className="auth-form">
-        {!isLogin && (
-          <div className="form-group">
-            <label htmlFor="name">Full Name:</label>
-            <input
-              type="text"
-              id="name"
-              value={name}
-              onChange={handleNameChange}
-              required
-              className="input-field"
-            />
+      {loading ? (
+        <div className="loading-screen">
+          <div className="loading-blocks">
+            <div className="block"></div>
+            <div className="block"></div>
+            <div className="block"></div>
+            <div className="block"></div>
           </div>
-        )}
-
-        <div className="form-group">
-          <label htmlFor="email">Email Address:</label>
-          <input
-            type="email"
-            id="email"
-            value={email}
-            onChange={handleEmailChange}
-            required
-            className="input-field"
-          />
         </div>
+      ) : (
+        // Authentication form
+        <>
+          <h2>{isLogin ? 'Login' : 'Sign Up'}</h2>
 
-        <div className="form-group">
-          <label htmlFor="password">Password:</label>
-          <input
-            type="password"
-            id="password"
-            value={password}
-            onChange={handlePasswordChange}
-            required
-            className="input-field"
-          />
-        </div>
+          <form onSubmit={handleSubmit} className="auth-form">
+            {!isLogin && (
+              <div className="form-group">
+                <label htmlFor="name">Full Name:</label>
+                <input
+                  type="text"
+                  id="name"
+                  value={name}
+                  onChange={handleNameChange}
+                  required
+                  className="input-field"
+                />
+              </div>
+            )}
 
-        {!isLogin && (
-          <div className="form-group">
-            <label htmlFor="role">Role:</label>
-            <select id="role" value={role} disabled className="input-field">
-              <option value="Admin">Admin</option> {/* Only Admin option */}
-            </select>
-          </div>
-        )}
+            <div className="form-group">
+              <label htmlFor="email">Email Address:</label>
+              <input
+                type="email"
+                id="email"
+                value={email}
+                onChange={handleEmailChange}
+                required
+                className="input-field"
+              />
+            </div>
 
-        <button type="submit" className="submit-btn">{isLogin ? 'Login' : 'Sign Up'}</button>
-      </form>
+            <div className="form-group">
+              <label htmlFor="password">Password:</label>
+              <input
+                type="password"
+                id="password"
+                value={password}
+                onChange={handlePasswordChange}
+                required
+                className="input-field"
+              />
+            </div>
 
-      <p className="toggle-account">
-        <span>{isLogin ? "Don't have an account?" : "Already have an account?"}</span>
-        <button className="toggle-btn" onClick={() => setIsLogin(!isLogin)}>
-          {isLogin ? 'Sign Up here' : 'Login here'}
-        </button>
-      </p>
+            {!isLogin && (
+              <div className="form-group">
+                <label htmlFor="role">Role:</label>
+                <select id="role" value={role} disabled className="input-field">
+                  <option value="Admin">Admin</option>
+                </select>
+              </div>
+            )}
+
+            <button type="submit" className="submit-btn">
+              {isLogin ? 'Login' : 'Sign Up'}
+            </button>
+          </form>
+
+          <p className="toggle-account">
+            <span>{isLogin ? "Don't have an account?" : 'Already have an account?'}</span>
+            <button className="toggle-btn" onClick={() => setIsLogin(!isLogin)}>
+              {isLogin ? 'Sign Up here' : 'Login here'}
+            </button>
+          </p>
+        </>
+      )}
     </div>
   );
 }
