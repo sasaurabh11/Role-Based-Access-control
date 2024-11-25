@@ -1,22 +1,33 @@
 import React, { useEffect, useState } from 'react';
-import { getUser, AddUsers, deleteUser, updateUser } from '../services/api';
-import './UserManagement.css'; // External CSS for styling
+import { getUser, AddUsers, deleteUser, updateUser, getRoles } from '../services/api';
+import './UserManagement.css';
 
 const UserManagement = () => {
   const [users, setUsers] = useState([]);
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [role, setRole] = useState('');
+  const [serverRole, setServerRole] = useState('');
   const [status, setStatus] = useState('Active');
   const [editingUser, setEditingUser] = useState(null);
 
   useEffect(() => {
     fetchUsers();
+    fetchRoles();
   }, []);
 
   const fetchUsers = async () => {
     const response = await getUser();
     setUsers(response);
+  };
+
+  const fetchRoles = async () => {
+    try {
+      const response = await getRoles();
+      setServerRole(response);
+    } catch (err) {
+      console.error('Error fetching roles:', err);
+    }
   };
 
   const handleAddUser = async () => {
@@ -87,10 +98,17 @@ const UserManagement = () => {
           onChange={(e) => setRole(e.target.value)}
         >
           <option value="">Select Role</option>
-          <option value="Admin">Admin</option>
-          <option value="Editor">Editor</option>
-          <option value="Viewer">Viewer</option>
+          {serverRole && serverRole.length > 0 ? (
+            serverRole.map((roleItem) => (
+              <option key={roleItem._id} value={roleItem.name}>
+                {roleItem.name}
+              </option>
+            ))
+          ) : (
+            <option disabled>Loading roles...</option>
+          )}
         </select>
+
         <select
           className="select-field"
           value={status}

@@ -10,8 +10,6 @@ import AccountProvider, { AccountContext } from './ContextApi/AccountProvider';
 
 const ProtectedRoute = ({ children }) => {
   const { localAccount } = useContext(AccountContext);
-
-  console.log(localAccount)
   if (!localAccount) {
     return <Navigate to="/" />;
   }

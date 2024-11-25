@@ -114,7 +114,6 @@ const addPermission = async (req, res) => {
       }
 
       role.permissions.splice(permissionIndex, 1);
-      console.log("Permissions after removal:", role.permissions);
 
       await role.save();
 
