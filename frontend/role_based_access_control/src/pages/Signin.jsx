@@ -21,7 +21,7 @@ function AuthForm() {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    setLoading(true); // Show loading screen
+    setLoading(true);
 
     try {
       if (isLogin) {
